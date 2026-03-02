@@ -42,7 +42,34 @@ async function userRegisterController(req,res){
 
 async function userLoginController(req,res){
     const {email, password} = req.body;
-    if()
+
+     const isUserExists = await userModel.findOne({email:email}).select("+password")
+
+     if(!isUserExists){
+        return res.status(401).json({message:"Invalid login credentials!"})
+     }
+     
+    const isValidPassword = await isUserExists.comparePassword(password)
+
+    if(!isValidPassword){
+         return res.status(401).json({message:"Invalid login credentials!"})
+
+    }
+
+    const token = jwt.sign({userId:isUserExists._id}, process.env.JWT_SECRET, {expiresIn: "3d"})
+    res.cookie("token",token)
+
+    res.status(200).json({ message:"Login successfully",
+        isUserExists:{
+            _id:isUserExists._id,
+            name:isUserExists.name,
+            email:isUserExists.email
+            
+        },
+        token
+
+    })
+
 
 }
 
