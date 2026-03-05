@@ -65,7 +65,15 @@ async function createTransaction(req,res){
         }
     }
 
-     
+     // 3. Check account status
+
+     if(formUserAccount.status !== "ACTIVE" || toUserAccount.status !== "ACTIVE"){
+        return res.status(400).json({
+            message:"Both fromAccount and toAccount must be ACTIVE to process transaction"
+        })
+     }
+
+     // 4. Derive sender balanace from ledger {check whether user have sufficient amount or not he want to send}
 
      
 
