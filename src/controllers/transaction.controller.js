@@ -113,6 +113,14 @@ async function createTransaction(req,res){
         type:"CREDIT"
      },{ session })
 
+     // 8. Mark transaction completed
+     transaction.status = "COMPLETED"
+     await transaction.save({session})
+
+     await session.commitTransaction()
+     session.endSession()
+
+
 
 
      
