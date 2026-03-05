@@ -7,6 +7,10 @@ const router = express.Router();
 // POST/api/accounts/
 router.post('/', authMiddleware.authMiddleware, accountController.createAccountController )
 
+// GET/api/accounts/
+
+router.get('/', authMiddleware.authMiddleware )
+
 
 
 
