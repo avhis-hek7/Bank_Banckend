@@ -12,7 +12,8 @@ router = express.Router();
 // POST/api/transactions/
 router.post('/', authMiddleware.authMiddleware, transactionController.createTransaction)
 
-
+//POST/api/tranactions/system/initial-funds
+router.post('/system/initial-funds', authMiddleware.authSystemMiddleware, )
 
 
 
