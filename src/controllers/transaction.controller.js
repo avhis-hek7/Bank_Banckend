@@ -117,8 +117,15 @@ async function createTransaction(req,res){
      transaction.status = "COMPLETED"
      await transaction.save({session})
 
+
+     // 9. commit mongoDb session
      await session.commitTransaction()
      session.endSession()
+
+     // 10. send the email notification
+     
+
+
 
 
 

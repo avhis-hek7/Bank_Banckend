@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middleware/auth.middleware');
-const { router } = require('../app');
+
 
 
 
@@ -8,6 +8,7 @@ const { router } = require('../app');
 
 router = express.Router();
 
+// POST/api/transactions/
 router.post('/', authMiddleware.authMiddleware)
 
 
