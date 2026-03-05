@@ -1,5 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middleware/auth.middleware');
+const transactionController = require('../controllers/transaction.controller')
 
 
 
@@ -9,7 +10,7 @@ const authMiddleware = require('../middleware/auth.middleware');
 router = express.Router();
 
 // POST/api/transactions/
-router.post('/', authMiddleware.authMiddleware)
+router.post('/', authMiddleware.authMiddleware, transactionController.createTransaction)
 
 
 
