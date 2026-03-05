@@ -142,4 +142,46 @@ async function sendTransactionEmail(userEmail, name, amount, toAccount) {
 
 }
 
-module.exports = { sendRegisterationEmail };
+async function sendTransactionFailureEmail(userEmail, name, amount, toAccount) {
+  const subject = "Transaction Failed!";
+
+  const text = `
+Hello ${name},
+
+Your transaction could not be completed.
+
+Transaction Details:
+Amount: ${amount}
+Recipient Account: ${toAccount}
+Status: FAILED
+
+Please check your account balance or try again later.
+
+Best regards,
+The Backend Ledger Team
+`;
+
+  const html = `
+<h3>Hello ${name},</h3>
+
+<p>We regret to inform you that your transaction could not be completed.</p>
+
+<p>
+<b>Transaction Details:</b><br>
+Amount: <b>${amount}</b><br>
+Recipient Account: <b>${toAccount}</b><br>
+Status: <span style="color:red;"><b>FAILED</b></span>
+</p>
+
+<p>Please check your account balance or try again later.</p>
+
+<p>Best regards,<br>
+<strong>The Backend Ledger Team</strong></p>
+`;
+
+  await sendEmail(userEmail, subject, text, html)
+
+
+}
+
+module.exports = { sendRegisterationEmail, sendTransactionEmail, sendTransactionFailureEmail };
