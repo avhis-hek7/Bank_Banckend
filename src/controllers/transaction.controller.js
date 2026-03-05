@@ -95,6 +95,24 @@ async function createTransaction(req,res){
         status:"PENDING"
      },{ session })
 
+     // 6. create a Debit ledger entry
+       const debitLedgerEntry = await ledgerModel.create({
+        account: fromAccount,
+        amount: amount,
+        transaction: transaction._id,
+        type:"DEBIT"
+     },{ session })
+
+
+
+     // 7. create a Cebit ledger entry
+     const creditLedgerEntry = await ledgerModel.create({
+        account: toAccount,
+        amount: amount,
+        transaction: transaction._id,
+        type:"CREDIT"
+     },{ session })
+
 
 
      
